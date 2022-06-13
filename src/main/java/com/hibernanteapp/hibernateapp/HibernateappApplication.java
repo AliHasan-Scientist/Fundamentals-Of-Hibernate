@@ -5,28 +5,28 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.hibernanteapp.hibernateapp.model.Certificate;
-import com.hibernanteapp.hibernateapp.model.Student;
-import com.hibernanteapp.hibernateapp.repositeries.StudentRepistery;
+import com.hibernanteapp.hibernateapp.model.Answer;
+import com.hibernanteapp.hibernateapp.model.Questions;
+import com.hibernanteapp.hibernateapp.repositeries.AnswerRepositery;
+import com.hibernanteapp.hibernateapp.repositeries.QuestionRepositery;
 
 @AutoConfiguration
 @SpringBootApplication
 public class HibernateappApplication {
 
-	public static void main(String[] args)  {
+	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(HibernateappApplication.class, args);
-		StudentRepistery studentRepistery = context.getBean(StudentRepistery.class);
-		Student student = new Student();
-
-	
-		student.setAddress("Vehari");
-		student.setName("Ali Hasan Mubarak");
-		Certificate certificate = new Certificate();
-		certificate.setCourse("Spring Boot");
-		certificate.setDuration("1 Month");
-		student.setCerti(certificate);
-		Student save = studentRepistery.save(student);
-		System.out.println(save);
+		QuestionRepositery questionRepositery = context.getBean(QuestionRepositery.class);
+		AnswerRepositery answerRepositery = context.getBean(AnswerRepositery.class);
+		Questions questions = new Questions();
+		Answer answer = new Answer();
+		questions.setQuestionId(101);
+		questions.setQuestsion("What is Computer?");
+		answer.setAnswer_id(201);
+		answer.setAnswer("Computer in machine");
+		questions.setAnswer(answer);
+		questionRepositery.save(questions);
+		// answerRepositery.save(answer);
 	}
 
 }
