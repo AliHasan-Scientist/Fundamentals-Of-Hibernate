@@ -1,39 +1,32 @@
 package com.hibernanteapp.hibernateapp;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
-import com.hibernanteapp.hibernateapp.model.User;
-import com.hibernanteapp.hibernateapp.repositeries.UserRepositery;
+import com.hibernanteapp.hibernateapp.model.Certificate;
+import com.hibernanteapp.hibernateapp.model.Student;
+import com.hibernanteapp.hibernateapp.repositeries.StudentRepistery;
 
 @AutoConfiguration
 @SpringBootApplication
 public class HibernateappApplication {
 
-	public static void main(String[] args) throws IOException {
-		ApplicationContext context = SpringApplication.run(HibernateappApplication.class, args);
-		UserRepositery userRepositery = context.getBean(UserRepositery.class);
-		User user = new User();
+	public static void main(String[] args)  {
+		ConfigurableApplicationContext context = SpringApplication.run(HibernateappApplication.class, args);
+		StudentRepistery studentRepistery = context.getBean(StudentRepistery.class);
+		Student student = new Student();
 
-		user.setAddress("vehari");
-		user.setAge("18");
-		user.setSalary(1222222);
-		user.setIsOpen(true);
-		user.setName("Roy Ali Hasan");
-		user.setX(1212121211111.1);
-		user.setCity("Vehari");
-		FileInputStream fis = new FileInputStream("src/main/java/ali.jpeg");
-		byte[] data = new byte[fis.available()];
-		fis.read(data);
-		user.setImage(data);
-		User save = userRepositery.save(user);
+	
+		student.setAddress("Vehari");
+		student.setName("Ali Hasan Mubarak");
+		Certificate certificate = new Certificate();
+		certificate.setCourse("Spring Boot");
+		certificate.setDuration("1 Month");
+		student.setCerti(certificate);
+		Student save = studentRepistery.save(student);
 		System.out.println(save);
-
 	}
 
 }
